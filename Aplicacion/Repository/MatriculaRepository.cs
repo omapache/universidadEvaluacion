@@ -23,5 +23,18 @@ public class MatriculaRepository : GenericRepo<Matricula>, IMatricula
         return await _context.Matriculas
         .FirstOrDefaultAsync(p => p.Id == id);
     }
+    public async Task<IEnumerable<object>> MatriculadosPorCurso() 
+    {
+        var resultado = await _context.Matriculas
+            .GroupBy(m => m.CursoEscolar.AñoInicio)
+            .Select(g => new
+            {
+                AnioCursoEscolar = g.Key,
+                NumAlumnosMatriculados = g.Count()
+            })
+            .OrderBy(g => g.AnioCursoEscolar)
+            .ToListAsync();
 
+        return resultado;
+    }
 }

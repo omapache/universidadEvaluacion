@@ -48,7 +48,7 @@ namespace Persistencia.Data.Migrations
 
                     b.Property<string>("Nombre")
                         .IsRequired()
-                        .HasMaxLength(50)
+                        .HasMaxLength(255)
                         .HasColumnType("varchar")
                         .HasColumnName("nombre");
 
@@ -113,7 +113,7 @@ namespace Persistencia.Data.Migrations
 
                     b.Property<string>("Nombre")
                         .IsRequired()
-                        .HasMaxLength(50)
+                        .HasMaxLength(255)
                         .HasColumnType("varchar")
                         .HasColumnName("nombre");
 

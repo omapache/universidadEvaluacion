@@ -14,7 +14,7 @@ public class AsignaturaConfiguration : IEntityTypeConfiguration<Asignatura>
         builder.Property(e => e.Nombre)
         .HasColumnName("nombre")
         .HasColumnType("varchar")
-        .HasMaxLength(50)
+        .HasMaxLength(255)
         .IsRequired();
 
         builder.Property(e => e.Creditos)

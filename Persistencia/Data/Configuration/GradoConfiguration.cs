@@ -14,7 +14,7 @@ public class GradoConfiguration : IEntityTypeConfiguration<Grado>
                 builder.Property(e => e.Nombre)
                 .HasColumnName("nombre")
                 .HasColumnType("varchar")
-                .HasMaxLength(50)
+                .HasMaxLength(255)
                 .IsRequired();
             }
         }

@@ -64,5 +64,54 @@ public class AsignaturaRepository : GenericRepo<Asignatura>, IAsignatura
 
         return Movimiento;
     }
-    
+    public async Task<IEnumerable<object>> AsignaturasSinProfesores()
+    {
+        var asignaturas = await (
+            from a in _context.Asignaturas
+            where a.IdProfesorFk == null
+            select new
+            {
+                IdAsignatura = a.Id,
+                Asignatura = a.Nombre
+            })
+            .ToListAsync();
+
+        return asignaturas;
+    } 
+    public async Task<IEnumerable<object>> AsignaturaQueNoSeHayaImpartido()
+    {
+        var departamentos = await (
+            from m in _context.Matriculas
+            join a in _context.Asignaturas on m.IdAsignaturaFk equals a.Id
+            join p in _context.Profesores on a.IdProfesorFk equals p.Id
+            join d in _context.Departamentos on p.IdDepartamentoFk equals d.Id
+            select new
+            {
+                Departamento = d.Nombre,
+                AsignaturasNoImpartidas = (
+                    from a in _context.Asignaturas
+                    where a.IdProfesorFk.HasValue 
+                    where !_context.Matriculas.Any(m => m.IdAsignaturaFk == a.Id)
+                    select a.Nombre
+                ).ToList()
+            })
+            .Where(depto => depto.AsignaturasNoImpartidas.Any())
+            .ToListAsync();
+
+        return departamentos;
+    }
+    public async Task<IEnumerable<object>> AsignaturaSinProfesor() 
+    {
+        var resultado = await _context.Asignaturas
+            .Where(d => d.IdProfesorFk == null)
+            .Select(d => new
+            {
+                Id = d.Id,
+                Asignatura = d.Nombre
+            })
+            .OrderBy(dp => dp.Id)
+            .ToListAsync();
+
+        return resultado;
+    }
 }

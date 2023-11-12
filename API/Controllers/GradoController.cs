@@ -80,4 +80,30 @@ namespace API.Controllers;
         await unitofwork.SaveAsync();
         return NoContent();
     }
+    [HttpGet("consulta21")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<IEnumerable<object>>> GradosYNumAsignaturas()
+    {
+        var Persona = await unitofwork.Grados.GradosYNumAsignaturas();
+        return mapper.Map<List<object>>(Persona);
+    }
+    
+    [HttpGet("consulta22")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<IEnumerable<object>>> GradosYNumAsignaturasMayorA40()
+    {
+        var Persona = await unitofwork.Grados.GradosYNumAsignaturasMayorA40();
+        return mapper.Map<List<object>>(Persona);
+    }
+    
+    [HttpGet("consulta23")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<IEnumerable<object>>> GradosConSuma()
+    {
+        var Persona = await unitofwork.Grados.GradosConSuma();
+        return mapper.Map<List<object>>(Persona);
+    }
 }

@@ -175,4 +175,87 @@ namespace API.Controllers;
         var dto = mapper.Map<IEnumerable<object>>(entidad);
         return Ok(dto);
     }
+    [HttpGet("consulta17")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<IActionResult> TotalAlumnas()
+    {
+        var entidad = await unitofwork.Personas.TotalAlumnas();
+        var dto = mapper.Map<int>(entidad);
+        return Ok(dto);
+    }
+    [HttpGet("consulta18")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<IEnumerable<object>>> AlumnosHombresNac1999()
+    {
+        var personas = await unitofwork.Personas.AlumnosHombresNac1999();
+        return Ok(personas);
+    }
+
+    [HttpGet("consulta19")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<IEnumerable<object>>> ProfEnCadaDepartamento()
+    {
+        var Persona = await unitofwork.Personas.ProfEnCadaDepartamento();
+        return mapper.Map<List<object>>(Persona);
+    }
+
+    [HttpGet("consulta20")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<IEnumerable<object>>> DepartamentoYProfesor()
+    {
+        var Persona = await unitofwork.Personas.DepartamentoYProfesor();
+        return mapper.Map<List<object>>(Persona);
+    }
+    
+    [HttpGet("consulta25")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<IEnumerable<object>>> AsignaturaPorProfesor()
+    {
+        var Persona = await unitofwork.Personas.AsignaturaPorProfesor();
+        return mapper.Map<List<object>>(Persona);
+    }
+
+    
+    [HttpGet("consulta26")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<IEnumerable<object>>> AlumnoMaJoven()
+    {
+        var personas = await unitofwork.Personas.AlumnoMaJoven();
+        return Ok(personas);
+    }
+
+    
+    [HttpGet("consulta27")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<IEnumerable<object>>> ProfesoresSinDepartamentos()
+    {
+        var personas = await unitofwork.Personas.ProfesoresSinDepartamentos();
+        return Ok(personas);
+    }
+    
+    [HttpGet("consulta28")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<IEnumerable<object>>> DepartamentosSinProfesor()
+    {
+        var Persona = await unitofwork.Personas.DepartamentosSinProfesor();
+        return mapper.Map<List<object>>(Persona);
+    }
+
+    
+    [HttpGet("consulta29")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<IEnumerable<object>>> ProfesorConDeptPeroSinAsignatura()
+    {
+        var Persona = await unitofwork.Personas.ProfesorConDeptPeroSinAsignatura();
+        return mapper.Map<List<object>>(Persona);
+    }
 }

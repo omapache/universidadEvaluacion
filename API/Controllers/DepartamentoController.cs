@@ -80,4 +80,30 @@ namespace API.Controllers;
         await unitofwork.SaveAsync();
         return NoContent();
     }
+    [HttpGet("consulta13")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<object>> DepartamentoSinProfesores()
+    {
+        var entidad = await unitofwork.Departamentos.DepartamentoSinProfesores();
+        var dto = mapper.Map<IEnumerable<object>>(entidad);
+        return Ok(dto);
+    }
+    [HttpGet("consulta20")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<object>> DepartamentoYProfesor()
+    {
+        var entidad = await unitofwork.Departamentos.DepartamentoYProfesor();
+        var dto = mapper.Map<IEnumerable<object>>(entidad);
+        return Ok(dto);
+    }
+    [HttpGet("consulta31")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<IEnumerable<object>>> SinAsignaturas()
+    {
+        var Persona = await unitofwork.Departamentos.SinAsignaturas();
+        return mapper.Map<List<object>>(Persona);
+    }
 }

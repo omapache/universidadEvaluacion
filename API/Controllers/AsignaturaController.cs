@@ -99,4 +99,30 @@ namespace API.Controllers;
         var dto = mapper.Map<IEnumerable<object>>(entidad);
         return Ok(dto);
     }
+    [HttpGet("consulta15")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<object>> AsignaturasSinProfesores()
+    {
+        var entidad = await unitofwork.Asignaturas.AsignaturasSinProfesores();
+        var dto = mapper.Map<IEnumerable<object>>(entidad);
+        return Ok(dto);
+    }
+    [HttpGet("consulta16")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<object>> AsignaturaQueNoSeHayaImpartido()
+    {
+        var entidad = await unitofwork.Asignaturas.AsignaturaQueNoSeHayaImpartido();
+        var dto = mapper.Map<IEnumerable<object>>(entidad);
+        return Ok(dto);
+    }
+    [HttpGet("consulta30")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status400BadRequest)]
+    public async Task<ActionResult<IEnumerable<object>>> AsignaturaSinProfesor()
+    {
+        var Persona = await unitofwork.Asignaturas.AsignaturaSinProfesor();
+        return mapper.Map<List<object>>(Persona);
+    }
 }
